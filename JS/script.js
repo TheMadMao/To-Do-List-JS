@@ -14,3 +14,12 @@ add_button.addEventListener('click', () => {
         input.value = '';
     }
 });
+
+delete_button.addEventListener('click', () => {
+    if (ul.children.length === 0) {
+        alert('No tasks to delete!');
+        return;
+    } else {
+        ul.removeChild(ul.lastElementChild);
+    }
+});
