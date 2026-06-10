@@ -1,3 +1,4 @@
+let toDoList = [];
 const input = document.querySelector('input');
 const add_button = document.querySelector('#add_btn');
 const delete_button = document.querySelector('#delete_btn');
@@ -8,6 +9,10 @@ add_button.addEventListener('click', () => {
         alert('Please enter a task!');
         return;
     } else {
+        const newTask = input.value;
+        toDoList.push(newTask);
+        localStorage.setItem("tasks", JSON.stringify(toDoList));
+        console.log(localStorage.getItem("tasks"));
         const new_task = document.createElement('li');
         const delete_task = document.createElement('button');
         delete_task.addEventListener('click', () => {
@@ -22,4 +27,8 @@ add_button.addEventListener('click', () => {
         new_task.appendChild(delete_task);
         input.value = '';
     }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    
 });
