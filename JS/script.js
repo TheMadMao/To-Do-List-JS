@@ -12,23 +12,31 @@ add_button.addEventListener('click', () => {
         const newTask = input.value;
         toDoList.push(newTask);
         localStorage.setItem("tasks", JSON.stringify(toDoList));
-        console.log(localStorage.getItem("tasks"));
-        const new_task = document.createElement('li');
-        const delete_task = document.createElement('button');
-        delete_task.addEventListener('click', () => {
-            const taskToDelete = delete_task.parentElement;
-            ul.removeChild(taskToDelete);
-        });
-        delete_task.textContent = 'Delete';
-        delete_task.type = 'button';
-        delete_task.classList.add('delete');
-        new_task.textContent = input.value;
-        ul.appendChild(new_task);
-        new_task.appendChild(delete_task);
-        input.value = '';
+
+        taskCreator();
     }
 });
 
+function taskCreator(taskText) {
+    const new_task = document.createElement('li');
+    const delete_task = document.createElement('button');
+    delete_task.addEventListener('click', () => {
+        const taskToDelete = delete_task.parentElement;
+        ul.removeChild(taskToDelete);
+    });
+    delete_task.textContent = 'Delete';
+    delete_task.type = 'button';
+    delete_task.classList.add('delete');
+    new_task.textContent = input.value;
+    ul.appendChild(new_task);
+    new_task.appendChild(delete_task);
+    input.value = '';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    
+    const storedTasks = JSON.parse(localStorage.getItem("tasks"));
+    storedTasks.forEach(task => {
+        input.value = task;
+        taskCreator();
+    });
 });
